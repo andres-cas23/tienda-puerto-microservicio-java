@@ -20,12 +20,12 @@ public class ProductoController {
 
     @Operation(summary = "Lista todos los productos")
     @GetMapping({"", "/"})
-        public List<Producto> listar() {
+    public List<Producto> listar() {
         return supabaseService.listarTodos();
     }
 
     @Operation(summary = "Obtiene un producto por id")
-    @GetMapping("/{id}")
+    @GetMapping({"/{id}", "/{id}/"})
     public ResponseEntity<?> obtener(@PathVariable Integer id) {
         Producto producto = supabaseService.obtenerPorId(id);
         if (producto == null) {
@@ -36,14 +36,14 @@ public class ProductoController {
     }
 
     @Operation(summary = "Crea un nuevo producto")
-    @PostMapping
+    @PostMapping({"", "/"})
     public ResponseEntity<Producto> crear(@RequestBody Producto producto) {
         Producto creado = supabaseService.crear(producto);
         return ResponseEntity.status(HttpStatus.CREATED).body(creado);
     }
 
     @Operation(summary = "Actualiza un producto existente")
-    @PutMapping("/{id}")
+    @PutMapping({"/{id}", "/{id}/"})
     public ResponseEntity<?> actualizar(@PathVariable Integer id, @RequestBody Producto producto) {
         Producto actualizado = supabaseService.actualizar(id, producto);
         if (actualizado == null) {
@@ -54,7 +54,7 @@ public class ProductoController {
     }
 
     @Operation(summary = "Elimina un producto")
-    @DeleteMapping("/{id}")
+    @DeleteMapping({"/{id}", "/{id}/"})
     public ResponseEntity<?> eliminar(@PathVariable Integer id) {
         boolean eliminado = supabaseService.eliminar(id);
         if (!eliminado) {
