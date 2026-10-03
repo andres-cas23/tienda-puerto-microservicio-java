@@ -19,8 +19,8 @@ public class ProductoController {
     private SupabaseService supabaseService;
 
     @Operation(summary = "Lista todos los productos")
-    @GetMapping
-    public List<Producto> listar() {
+    @GetMapping({"", "/"})
+        public List<Producto> listar() {
         return supabaseService.listarTodos();
     }
 
